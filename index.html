@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Передозировка: предупреждение и помощь</title>
-    <!-- Подключаем шрифт Inter для современного и читаемого вида -->
+    <title>Передозировка лекарствами: помощь и профилактика</title>
+    <!-- Подключаем шрифт Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <!-- Подключаем Font Awesome для иконок (версия 6) -->
+    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Сброс стилей и базовые настройки */
@@ -107,8 +107,8 @@
             margin-bottom: 20px;
         }
 
-        /* Карточки с фактами */
-        .grid-2, .grid-3 {
+        /* Карточки */
+        .grid-2, .grid-3, .grid-4 {
             display: grid;
             gap: 30px;
             margin-top: 30px;
@@ -122,6 +122,10 @@
             grid-template-columns: repeat(3, 1fr);
         }
 
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
         .card {
             background: white;
             border-radius: 24px;
@@ -129,6 +133,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             border: 1px solid rgba(0, 0, 0, 0.03);
+            height: 100%;
         }
 
         .card:hover {
@@ -149,13 +154,21 @@
             color: #0b2a41;
         }
 
-        .card p {
+        .card p, .card ul {
             font-size: 1rem;
             color: #3a4e62;
             margin-bottom: 0;
         }
 
-        /* Специальный блок срочной помощи */
+        .card ul {
+            padding-left: 20px;
+        }
+
+        .card li {
+            margin-bottom: 8px;
+        }
+
+        /* Блок экстренной помощи */
         .emergency-box {
             background: #fff1f0;
             border-left: 8px solid #e74c3c;
@@ -189,7 +202,7 @@
 
         .emergency-content .phone i {
             margin-right: 10px;
-            color: #27ae60; /* зеленая трубка для контраста */
+            color: #27ae60;
         }
 
         .emergency-note {
@@ -209,7 +222,7 @@
             opacity: 0.7;
         }
 
-        /* Таблица с признаками */
+        /* Таблица симптомов */
         .symptoms-table {
             background: white;
             border-radius: 28px;
@@ -253,7 +266,56 @@
             color: #3e5a70;
         }
 
-        /* Предупреждение (красная плашка) */
+        /* Группы препаратов */
+        .drug-group {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid #eef2f6;
+        }
+
+        .drug-group h4 {
+            font-size: 1.3rem;
+            color: #0b2a41;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .drug-group h4 i {
+            color: #e74c3c;
+            font-size: 1.5rem;
+        }
+
+        .symptoms-list, .help-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .symptoms-list > div, .help-list > div {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .symptoms-list ul, .help-list ul {
+            padding-left: 20px;
+        }
+
+        .symptoms-list li, .help-list li {
+            margin-bottom: 8px;
+        }
+
+        .help-list {
+            background: #f0f9ff;
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        /* Предупреждение */
         .warning-block {
             background: #e74c3c;
             color: white;
@@ -296,6 +358,35 @@
             transform: scale(1.02);
         }
 
+        /* Статистика */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #e74c3c;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #5a6f84;
+            margin-top: 10px;
+        }
+
         /* Подвал */
         .footer {
             background: #0b2a41;
@@ -321,7 +412,7 @@
             .header h1 { font-size: 2rem; }
             .header .subhead { font-size: 1.1rem; }
             h2 { font-size: 1.9rem; }
-            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .grid-2, .grid-3, .grid-4, .stats-grid { grid-template-columns: 1fr; }
             .emergency-box { flex-direction: column; text-align: center; }
             .symptom-row { flex-direction: column; }
             .symptom-icon { padding: 20px 0 0; background: transparent; }
@@ -337,17 +428,8 @@
     </header>
 
     <main>
-        <!-- Введение с важным сообщением -->
-        <section>
-            <div class="container">
-                <h2><i class="fas fa-info-circle"></i> Почему это важно</h2>
-                <p style="font-size: 1.25rem;">Передозировка лекарственными препаратами — это нештатная ситуация, которая может произойти с каждым: случайно (например, перепутали дозировку) или намеренно. В России ежегодно фиксируются тысячи случаев отравлений медикаментами. <strong>Своевременная помощь увеличивает шанс на спасение в разы.</strong></p>
-                <p>На этой странице собраны признаки передозировки, номера экстренных служб и рекомендации от токсикологов. Пожалуйста, отнеситесь к информации серьезно.</p>
-            </div>
-        </section>
-
-        <!-- Экстренный блок (самое важное) -->
-        <section style="padding-top: 0;">
+        <!-- Экстренный блок -->
+        <section style="padding-top: 40px;">
             <div class="container">
                 <div class="emergency-box">
                     <div class="emergency-content">
@@ -355,8 +437,8 @@
                         <div class="phone">
                             <i class="fas fa-phone-alt"></i> 103 или 112
                         </div>
-                        <p>Звонок бесплатный с любого телефона, работает круглосуточно.</p>
-                        <p class="emergency-note"><i class="fas fa-clock"></i> Не ждите ухудшения — вызывайте скорую при первых подозрениях на передозировку.</p>
+                        <p>Звонок бесплатный с любого телефона, работает круглосуточно. <strong>Не ждите ухудшения — вызывайте скорую при первых подозрениях.</strong></p>
+                        <p class="emergency-note"><i class="fas fa-clock"></i> Каждая минута может быть решающей. Ложный вызов лучше, чем потеря времени.</p>
                     </div>
                     <div class="emergency-image">
                         <i class="fas fa-ambulance"></i>
@@ -365,83 +447,273 @@
             </div>
         </section>
 
-        <!-- Основные признаки передозировки -->
+        <!-- Введение и статистика -->
         <section>
             <div class="container">
-                <h2><i class="fas fa-exclamation-circle"></i> Признаки передозировки</h2>
-                <p>Симптомы могут различаться в зависимости от препарата, но есть общие «красные флаги», требующие немедленного вызова скорой.</p>
+                <h2><i class="fas fa-info-circle"></i> Масштаб проблемы</h2>
+                <p style="font-size: 1.25rem;">Передозировка лекарственными препаратами — одна из самых частых причин экстренных вызовов скорой помощи. По данным токсикологических центров, лекарственные отравления занимают <strong>первое место</strong> среди всех видов острых отравлений [citation:9].</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">>50%</div>
+                        <div class="stat-label">всех отравлений приходятся на лекарства [citation:9]</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">2-е место</div>
+                        <div class="stat-label">занимают жаропонижающие и обезболивающие [citation:9]</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">80%</div>
+                        <div class="stat-label">случайных отравлений у детей происходит дома [citation:1]</div>
+                    </div>
+                </div>
+
+                <p>Важно понимать: передозировка может случиться с каждым — случайно (перепутали дозировку, ребенок нашел таблетки, пожилой человек забыл, что уже принял лекарство) или намеренно. В любом случае, <strong>своевременная помощь увеличивает шанс на спасение в разы</strong>.</p>
+            </div>
+        </section>
+
+        <!-- Общие признаки передозировки -->
+        <section>
+            <div class="container">
+                <h2><i class="fas fa-exclamation-circle"></i> Общие признаки передозировки</h2>
+                <p>Симптомы могут различаться в зависимости от препарата, но есть универсальные «красные флаги», требующие немедленного вызова скорой [citation:5][citation:9]:</p>
 
                 <div class="symptoms-table">
                     <div class="symptom-row">
                         <div class="symptom-icon"><i class="fas fa-brain"></i></div>
                         <div class="symptom-text">
                             <strong>Нарушение сознания</strong>
-                            <span>Спутанность, резкая сонливость, потеря сознания, человек не реагирует на вопросы.</span>
+                            <span>Спутанность, резкая сонливость, потеря сознания, человек не реагирует на вопросы, заторможен или наоборот — чрезмерно возбужден [citation:3].</span>
                         </div>
                     </div>
                     <div class="symptom-row">
                         <div class="symptom-icon"><i class="fas fa-lungs"></i></div>
                         <div class="symptom-text">
                             <strong>Дыхательные расстройства</strong>
-                            <span>Поверхностное, редкое или шумное дыхание, остановка дыхания.</span>
+                            <span>Поверхностное, редкое (менее 10 вдохов в минуту) или шумное дыхание, остановка дыхания [citation:8].</span>
                         </div>
                     </div>
                     <div class="symptom-row">
                         <div class="symptom-icon"><i class="fas fa-heart"></i></div>
                         <div class="symptom-text">
                             <strong>Сердечно-сосудистые симптомы</strong>
-                            <span>Сильное замедление или учащение пульса, падение давления, бледность/синюшность кожи.</span>
+                            <span>Сильное замедление (менее 50 уд/мин) или учащение (более 130 уд/мин) пульса, падение давления, бледность или синюшность кожи [citation:5].</span>
                         </div>
                     </div>
                     <div class="symptom-row">
                         <div class="symptom-icon"><i class="fas fa-stomach"></i></div>
                         <div class="symptom-text">
                             <strong>Желудочно-кишечные проявления</strong>
-                            <span>Тошнота, рвота (особенно с кровью), сильная боль в животе, понос.</span>
+                            <span>Тошнота, рвота (особенно с кровью), сильная боль в животе, диарея [citation:3][citation:7].</span>
                         </div>
                     </div>
                     <div class="symptom-row">
                         <div class="symptom-icon"><i class="fas fa-mountain"></i></div>
                         <div class="symptom-text">
                             <strong>Судороги, дрожь</strong>
-                            <span>Неконтролируемые подергивания мышц, эпилептиформные припадки.</span>
+                            <span>Неконтролируемые подергивания мышц, тремор конечностей, эпилептиформные припадки [citation:3][citation:5].</span>
+                        </div>
+                    </div>
+                    <div class="symptom-row">
+                        <div class="symptom-icon"><i class="fas fa-eye"></i></div>
+                        <div class="symptom-text">
+                            <strong>Изменение зрения и зрачков</strong>
+                            <span>Расширение или сужение зрачков (точечные зрачки), отсутствие реакции на свет, ухудшение зрения [citation:3][citation:8].</span>
                         </div>
                     </div>
                 </div>
-                <p style="margin-top: 25px;"><i class="fas fa-lightbulb" style="color: #f1c40f;"></i> Если вы обнаружили пустые упаковки от таблеток рядом с человеком, сохраните их — это поможет врачам быстрее определить препарат.</p>
+                <p style="margin-top: 25px;"><i class="fas fa-lightbulb" style="color: #f1c40f;"></i> Если вы обнаружили пустые упаковки от таблеток рядом с человеком, сохраните их — это поможет врачам быстрее определить препарат и ввести антидот [citation:1].</p>
             </div>
         </section>
 
-        <!-- Что делать до приезда скорой -->
+        <!-- Первая помощь: пошаговая инструкция -->
         <section style="background: #f1f9ff;">
             <div class="container">
-                <h2><i class="fas fa-hand-holding-heart"></i> Первая помощь</h2>
+                <h2><i class="fas fa-hand-holding-heart"></i> Первая помощь: пошаговая инструкция</h2>
+                <p><strong>Самое главное правило — не паниковать</strong> [citation:1]. От вашего спокойствия зависит правильность действий.</p>
+
                 <div class="grid-2">
                     <div class="card">
                         <i class="fas fa-phone-volume"></i>
-                        <h4>1. Вызовите скорую</h4>
-                        <p>Не тратьте время на поиски информации в интернете. Сразу звоните 103/112 и четко отвечайте на вопросы диспетчера.</p>
+                        <h4>Шаг 1. Вызовите скорую</h4>
+                        <p><strong>103 или 112</strong> — звоните немедленно, не тратя время на поиски информации в интернете. Четко отвечайте на вопросы диспетчера [citation:5].</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-info-circle"></i>
+                        <h4>Шаг 2. Соберите информацию</h4>
+                        <p>Постарайтесь выяснить: <strong>что именно принято, сколько, когда</strong>. Сохраните упаковки, пустые блистеры — это критически важно для врачей [citation:1][citation:5].</p>
                     </div>
                     <div class="card">
                         <i class="fas fa-person-praying"></i>
-                        <h4>2. Обеспечьте положение</h4>
-                        <p>Если человек без сознания, поверните его на бок (стабильное боковое положение) — это предотвратит западание языка и вдыхание рвотных масс.</p>
+                        <h4>Шаг 3. Обеспечьте положение</h4>
+                        <p>Если человек без сознания, поверните его на бок (стабильное боковое положение). Это предотвратит западание языка и вдыхание рвотных масс [citation:1].</p>
                     </div>
                     <div class="card">
-                        <i class="fas fa-hand"></i>
-                        <h4>3. Не вызывайте рвоту</h4>
-                        <p>При отравлении кислотами, щелочами, пенящимися веществами или при потере сознания рвота опасна. Только если это рекомендовано врачом скорой.</p>
-                    </div>
-                    <div class="card">
-                        <i class="fas fa-capsules"></i>
-                        <h4>4. Сохраните упаковку</h4>
-                        <p>Найдите пустые блистеры или флаконы — это поможет определить токсичное вещество и ввести антидот.</p>
+                        <i class="fas fa-hand-slash"></i>
+                        <h4>Шаг 4. Чего НЕ делать</h4>
+                        <ul>
+                            <li><strong>Не вызывайте рвоту</strong>, если человек без сознания или если прошло больше 2 часов [citation:1]</li>
+                            <li><strong>Не давайте ничего пить</strong> без указания врача (кроме случаев, когда нужно развести сорбент)</li>
+                            <li><strong>Не пытайтесь "нейтрализовать"</strong> лекарство другими препаратами</li>
+                        </ul>
                     </div>
                 </div>
+
+                <div class="warning-block" style="margin: 30px 0; padding: 30px;">
+                    <h3 style="font-size: 1.8rem;"><i class="fas fa-skull-crosswalk"></i> ОСТОРОЖНО: рвота</h3>
+                    <p>При отравлении кислотами, щелочами, пенящимися веществами или при потере сознания рвота <strong>опасна для жизни</strong>. Никогда не вызывайте рвоту, если не уверены в безопасности! [citation:1]</p>
+                </div>
+
+                <h3>Если человек без сознания, но дышит:</h3>
+                <div class="grid-3" style="margin-top: 20px;">
+                    <div class="card">
+                        <i class="fas fa-rotate-left"></i>
+                        <h4>Поверните на бок</h4>
+                        <p>В стабильное боковое положение — это защитит дыхательные пути.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-head-side-cough"></i>
+                        <h4>Проверяйте дыхание</h4>
+                        <p>Следите, сохраняется ли дыхание до приезда скорой.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-temperature-low"></i>
+                        <h4>Согрейте</h4>
+                        <p>Укройте одеялом, если человек в прохладном помещении.</p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 40px;">Если человек не дышит (только для обученных!):</h3>
+                <p>Если у вас есть навыки сердечно-легочной реанимации, и вы уверены в своих действиях, начните непрямой массаж сердца и искусственное дыхание до прибытия медиков [citation:5].</p>
             </div>
         </section>
 
-        <!-- Распространенные группы риска (карточки) -->
+        <!-- Подробно по группам препаратов -->
+        <section>
+            <div class="container">
+                <h2><i class="fas fa-pills"></i> Особенности разных групп препаратов</h2>
+                <p>Симптомы и первая помощь могут различаться в зависимости от того, какое лекарство принято. Вот основные группы:</p>
+
+                <div class="drug-group">
+                    <h4><i class="fas fa-moon"></i> Снотворные, успокаивающие (бензодиазепины, барбитураты)</h4>
+                    <div class="symptoms-list">
+                        <div>
+                            <strong>Симптомы:</strong>
+                            <ul>
+                                <li>Сонливость, переходящая в глубокий сон [citation:3]</li>
+                                <li>Ослабление рефлексов</li>
+                                <li>Поверхностное дыхание, урежение дыхания [citation:3]</li>
+                                <li>Нарушение координации, невнятная речь</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="help-list">
+                        <div>
+                            <strong>Первая помощь:</strong>
+                            <ul>
+                                <li>Промывание желудка (только если человек в сознании и прошло менее 2 часов)</li>
+                                <li>Активированный уголь [citation:3]</li>
+                                <li>Следить за дыханием — может потребоваться искусственное дыхание</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drug-group">
+                    <h4><i class="fas fa-heartbeat"></i> Сердечные препараты (бета-блокаторы, сердечные гликозиды)</h4>
+                    <div class="symptoms-list">
+                        <div>
+                            <strong>Симптомы:</strong>
+                            <ul>
+                                <li>Резкое замедление пульса (брадикардия) [citation:7]</li>
+                                <li>Падение артериального давления [citation:7]</li>
+                                <li>Нарушения ритма сердца [citation:3]</li>
+                                <li>Тошнота, рвота, боли в животе [citation:3]</li>
+                                <li>При отравлении гликозидами — нарушения зрения, галлюцинации [citation:3]</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="help-list">
+                        <div>
+                            <strong>Первая помощь:</strong>
+                            <ul>
+                                <li><strong>НЕ вызывать рвоту</strong> — это может ухудшить состояние [citation:7]</li>
+                                <li>Промывание желудка только через зонд в стационаре</li>
+                                <li>При рвоте можно глотать кусочки льда [citation:3]</li>
+                                <li>Полный покой, согреть [citation:3]</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drug-group">
+                    <h4><i class="fas fa-tablets"></i> Обезболивающие и жаропонижающие (парацетамол, ибупрофен, анальгин)</h4>
+                    <div class="symptoms-list">
+                        <div>
+                            <strong>Симптомы (парацетамол):</strong>
+                            <ul>
+                                <li>В первые часы: тошнота, рвота, боли в животе [citation:7]</li>
+                                <li>Затем "светлый промежуток" (48-72 часа)</li>
+                                <li>Позже: поражение печени (желтуха, нарушение свертываемости крови) [citation:7]</li>
+                                <li>Опасная доза: от 7,5-10 г за раз [citation:7]</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong>Другие обезболивающие:</strong>
+                            <ul>
+                                <li>Шум в ушах [citation:3]</li>
+                                <li>Холодный пот, слабость [citation:3]</li>
+                                <li>Судороги</li>
+                                <li>Сонливость, нарушение сознания [citation:3]</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="help-list">
+                        <div>
+                            <strong>Первая помощь:</strong>
+                            <ul>
+                                <li>Промывание желудка (если с момента приема прошло менее 2-4 часов)</li>
+                                <li>Активированный уголь</li>
+                                <li>При парацетамоле важно начать лечение как можно раньше — есть антидот [citation:7]</li>
+                                <li>Обильное питье (если человек в сознании)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="drug-group">
+                    <h4><i class="fas fa-brain"></i> Антидепрессанты и психотропные</h4>
+                    <div class="symptoms-list">
+                        <div>
+                            <strong>Симптомы:</strong>
+                            <ul>
+                                <li>Возбуждение или угнетение сознания [citation:3]</li>
+                                <li>Сухость во рту [citation:3]</li>
+                                <li>Расширение зрачков</li>
+                                <li>Учащение пульса, нарушения ритма</li>
+                                <li>Судороги [citation:3]</li>
+                                <li>Повышение температуры</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="help-list">
+                        <div>
+                            <strong>Первая помощь:</strong>
+                            <ul>
+                                <li>Промывание желудка</li>
+                                <li>Активированный уголь</li>
+                                <li>При возбуждении — обеспечить безопасность, не давать травмироваться</li>
+                                <li>Следить за дыханием и сердцебиением</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="margin-top: 20px;"><i class="fas fa-stethoscope"></i> <strong>Важно:</strong> Это общие рекомендации. Точное лечение зависит от конкретного препарата, дозы и времени, прошедшего с момента приема. Врачи скорой помощи и токсикологи владеют полным протоколом лечения, включая специфические антидоты [citation:2][citation:4][citation:8].</p>
+            </div>
+        </section>
+
+        <!-- Кто в группе риска -->
         <section>
             <div class="container">
                 <h2><i class="fas fa-users"></i> Кто в группе риска</h2>
@@ -449,64 +721,77 @@
                     <div class="card">
                         <i class="fas fa-child"></i>
                         <h4>Дети</h4>
-                        <p>Из-за любопытства могут принять яркие таблетки за конфеты. Храните лекарства в недоступных местах.</p>
+                        <p>Из-за любопытства могут принять яркие таблетки за конфеты. Храните лекарства в недоступных местах, желательно под замком [citation:1][citation:9]. Особенно опасны сосудосуживающие капли — даже небольшое количество может вызвать тяжелое отравление у ребенка [citation:9].</p>
                     </div>
                     <div class="card">
                         <i class="fas fa-database"></i>
                         <h4>Пожилые люди</h4>
-                        <p>Спутанность дозировок, потеря памяти, одновременный прием нескольких препаратов.</p>
+                        <p>Спутанность дозировок, потеря памяти, одновременный прием нескольких препаратов (полипрагмазия), плохое зрение — все это повышает риск случайной передозировки [citation:6].</p>
                     </div>
                     <div class="card">
                         <i class="fas fa-brain"></i>
                         <h4>Люди с депрессией</h4>
-                        <p>Намеренная передозировка как способ суицида. Важно вовремя заметить изменения в поведении.</p>
+                        <p>Намеренная передозировка как способ суицида. Важно вовремя заметить изменения в поведении, обеспечить поддержку и ограничить доступ к большим количествам лекарств [citation:6].</p>
                     </div>
+                </div>
+                <div class="card" style="margin-top: 20px;">
+                    <i class="fas fa-capsules"></i>
+                    <h4>Все, кто принимает несколько препаратов одновременно</h4>
+                    <p>Некоторые лекарства усиливают действие друг друга. Даже терапевтические дозы в комбинации могут дать токсический эффект. Всегда консультируйтесь с врачом о совместимости препаратов [citation:3].</p>
                 </div>
             </div>
         </section>
-
-        <!-- Красная зона: важное предупреждение -->
-        <div class="container">
-            <div class="warning-block">
-                <h3><i class="fas fa-skull-crosswalk"></i> Это не игра</h3>
-                <p>Одна таблетка может стать фатальной. Если вы или кто-то рядом приняли слишком много лекарств — <strong>не ждите</strong>. Скорая помощь приедет быстрее, чем вы найдете ответ в интернете. Ложный вызов лучше, чем потеря времени.</p>
-                <a href="#" class="btn" onclick="alert('Пожалуйста, позвоните 112 или 103 прямо сейчас. Это не тест.'); return false;"><i class="fas fa-phone-alt"></i> Позвонить сейчас</a>
-            </div>
-        </div>
 
         <!-- Профилактика -->
-        <section>
+        <section style="background: #f0f9ff;">
             <div class="container">
-                <h2><i class="fas fa-shield-alt"></i> Как предотвратить</h2>
-                <div style="display: flex; flex-wrap: wrap; gap: 30px;">
-                    <div style="flex: 1; min-width: 250px;">
-                        <ul style="list-style: none; font-size: 1.1rem;">
-                            <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color: #27ae60; margin-right: 12px;"></i>Храните лекарства в оригинальной упаковке</li>
-                            <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color: #27ae60; margin-right: 12px;"></i>Не превышайте дозировку, указанную в инструкции</li>
-                            <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color: #27ae60; margin-right: 12px;"></i>Не сочетайте препараты без консультации врача</li>
-                            <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color: #27ae60; margin-right: 12px;"></i>Предупредите близких, какие лекарства вы принимаете</li>
-                            <li style="margin-bottom: 15px;"><i class="fas fa-check-circle" style="color: #27ae60; margin-right: 12px;"></i>Утилизируйте просроченные лекарства</li>
+                <h2><i class="fas fa-shield-alt"></i> Как предотвратить передозировку</h2>
+                <div class="grid-2">
+                    <div class="card">
+                        <i class="fas fa-lock"></i>
+                        <h4>Правильное хранение</h4>
+                        <ul>
+                            <li>Храните лекарства в оригинальной упаковке</li>
+                            <li>Держите аптечку в недоступном для детей месте (высоко, под замком) [citation:1]</li>
+                            <li>Не храните просроченные лекарства</li>
+                            <li>Для пожилых родственников используйте таблетницы с разделением по дням недели</li>
                         </ul>
                     </div>
-                    <div style="flex: 1; text-align: center;">
-                        <i class="fas fa-first-aid" style="font-size: 7rem; color: #a0c4e2; opacity: 0.6;"></i>
+                    <div class="card">
+                        <i class="fas fa-prescription-bottle"></i>
+                        <h4>Правильный прием</h4>
+                        <ul>
+                            <li>Не превышайте дозировку, указанную в инструкции</li>
+                            <li>Не сочетайте препараты без консультации врача [citation:3]</li>
+                            <li>Предупредите близких, какие лекарства вы принимаете</li>
+                            <li>Включайте свет, когда принимаете лекарства ночью</li>
+                            <li>Не называйте лекарства "конфетками" при детях [citation:9]</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Красная зона: предупреждение -->
+        <div class="container">
+            <div class="warning-block">
+                <h3><i class="fas fa-skull-crosswalk"></i> Помните: счет идет на минуты</h3>
+                <p>Одна таблетка может стать фатальной. Если вы или кто-то рядом приняли слишком много лекарств — <strong>не ждите</strong>. Скорая помощь приедет быстрее, чем вы найдете ответ в интернете. Ложный вызов лучше, чем потеря времени.</p>
+                <a href="#" class="btn" onclick="alert('Пожалуйста, позвоните 112 или 103 прямо сейчас, если есть подозрение на передозировку.'); return false;"><i class="fas fa-phone-alt"></i> Позвонить сейчас</a>
+            </div>
+        </div>
     </main>
 
     <footer class="footer">
         <div class="container">
             <p><i class="fas fa-heart" style="color: #e74c3c;"></i> Если вам нужна психологическая поддержка, вы можете позвонить на <strong>8-800-200-01-22</strong> (круглосуточная линия доверия).</p>
-            <p style="margin-top: 20px;">Информация носит справочный характер. При любых сомнениях — вызывайте скорую помощь. <br> © 2025 / Этот сайт создан в образовательных и профилактических целях.</p>
-            <p><i class="fab fa-github"></i> <a href="#">Репозиторий на GitHub</a> — вы можете предложить правки или улучшить контент.</p>
+            <p style="margin-top: 20px;"><i class="fas fa-balance-scale"></i> Информация основана на клинических рекомендациях Минздрава РФ, данных токсикологических центров и справочниках MSD [citation:2][citation:4][citation:6]. Носит справочный характер. При любых сомнениях — вызывайте скорую.</p>
+            <p style="margin-top: 20px;">© 2025 Профилактический проект. Сделано с заботой о жизни.</p>
+            <p><i class="fab fa-github"></i> <a href="#">Репозиторий на GitHub</a> — вы можете предложить правки.</p>
         </div>
     </footer>
 
-    <!-- Небольшой скрипт для предупреждения при клике на кнопку звонка (для демо) -->
     <script>
-        // Функция для имитации вызова (на реальном сайте можно убрать)
         document.querySelectorAll('.btn, .phone').forEach(el => {
             el.addEventListener('click', (e) => {
                 if (el.classList.contains('btn') || el.classList.contains('phone')) {
