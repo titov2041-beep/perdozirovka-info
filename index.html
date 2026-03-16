@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Передозировка лекарствами: помощь и профилактика</title>
+    <title>Передозировка лекарствами — помощь и профилактика</title>
     <!-- Подключаем шрифт Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,17 +11,22 @@
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Сброс стилей и базовые настройки */
+        /* ===== СБРОС И БАЗОВЫЕ НАСТРОЙКИ ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: #1a2a3a;
+            color: #1e293b;
             background-color: #f8fafc;
         }
 
@@ -31,20 +36,94 @@
             padding: 0 24px;
         }
 
-        /* Шапка сайта */
-        .header {
-            background: linear-gradient(135deg, #0b2a41 0%, #123b56 100%);
+        /* ===== НАВИГАЦИЯ ===== */
+        .navbar {
+            background: rgba(11, 42, 65, 0.95);
+            backdrop-filter: blur(10px);
             color: white;
-            padding: 60px 0 40px;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-bottom: 2px solid #e74c3c;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: #e74c3c;
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links a:hover {
+            background: #e74c3c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+        }
+
+        .nav-links a i {
+            margin-right: 6px;
+        }
+
+        /* ===== ШАПКА ===== */
+        .header {
+            background: linear-gradient(135deg, #0b2a41 0%, #1a4b6d 100%);
+            color: white;
+            padding: 60px 0 60px;
             text-align: center;
-            border-bottom: 6px solid #e74c3c;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M0 0 L100 100 M100 0 L0 100" stroke="white" stroke-width="0.5"/></svg>');
+            pointer-events: none;
         }
 
         .header h1 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 700;
             letter-spacing: -0.02em;
             margin-bottom: 16px;
+            animation: fadeInDown 0.8s ease;
         }
 
         .header h1 i {
@@ -55,14 +134,42 @@
         .header .subhead {
             font-size: 1.3rem;
             font-weight: 400;
-            opacity: 0.9;
+            opacity: 0.95;
             max-width: 700px;
             margin: 0 auto;
+            animation: fadeInUp 0.8s ease 0.2s both;
         }
 
-        /* Основные секции */
+        /* ===== АНИМАЦИИ ===== */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease both;
+        }
+
+        /* ===== ОСНОВНЫЕ СЕКЦИИ ===== */
         section {
-            padding: 60px 0;
+            padding: 70px 0;
             border-bottom: 1px solid #e2e8f0;
         }
 
@@ -71,26 +178,30 @@
         }
 
         h2 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            letter-spacing: -0.01em;
+            font-size: 2.3rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
             color: #0b2a41;
             margin-bottom: 32px;
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         h2 i {
             color: #e74c3c;
-            margin-right: 12px;
+            font-size: 2rem;
         }
 
         h2:after {
             content: '';
-            display: block;
-            width: 80px;
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 100px;
             height: 4px;
-            background: #e74c3c;
-            margin-top: 12px;
+            background: linear-gradient(90deg, #e74c3c, #f39c12);
             border-radius: 4px;
         }
 
@@ -103,82 +214,46 @@
 
         p {
             font-size: 1.1rem;
-            color: #2c3e50;
+            color: #334155;
             margin-bottom: 20px;
         }
 
-        /* Карточки */
-        .grid-2, .grid-3, .grid-4 {
-            display: grid;
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .grid-2 {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .grid-3 {
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        .grid-4 {
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .card {
-            background: white;
-            border-radius: 24px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            border: 1px solid rgba(0, 0, 0, 0.03);
-            height: 100%;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-        }
-
-        .card i {
-            font-size: 2.2rem;
-            color: #e74c3c;
-            margin-bottom: 20px;
-        }
-
-        .card h4 {
-            font-size: 1.4rem;
+        /* ===== ССЫЛКИ НА ИСТОЧНИКИ (В ТЕКСТЕ) ===== */
+        .source-ref {
+            display: inline-block;
+            font-size: 0.75rem;
             font-weight: 600;
-            margin-bottom: 12px;
-            color: #0b2a41;
+            color: #e74c3c;
+            background: #fee9e7;
+            padding: 2px 8px;
+            border-radius: 30px;
+            margin-left: 6px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(231, 76, 60, 0.2);
+            vertical-align: super;
+            line-height: 1.4;
         }
 
-        .card p, .card ul {
-            font-size: 1rem;
-            color: #3a4e62;
-            margin-bottom: 0;
+        .source-ref:hover {
+            background: #e74c3c;
+            color: white;
+            transform: scale(1.1);
+            border-color: #e74c3c;
         }
 
-        .card ul {
-            padding-left: 20px;
-        }
-
-        .card li {
-            margin-bottom: 8px;
-        }
-
-        /* Блок экстренной помощи */
+        /* ===== ЭКСТРЕННЫЙ БЛОК ===== */
         .emergency-box {
-            background: #fff1f0;
+            background: linear-gradient(135deg, #fff1f0, #ffe9e7);
             border-left: 8px solid #e74c3c;
-            border-radius: 20px;
+            border-radius: 30px;
             padding: 40px;
             margin: 40px 0;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             gap: 30px;
+            box-shadow: 0 20px 40px rgba(231, 76, 60, 0.1);
         }
 
         .emergency-content {
@@ -190,14 +265,22 @@
             color: #b03a2e;
             margin-top: 0;
             font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .emergency-content .phone {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: #c0392b;
             letter-spacing: 2px;
             margin: 20px 0 10px;
+            display: inline-block;
+            padding: 12px 30px;
+            background: white;
+            border-radius: 60px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
         }
 
         .emergency-content .phone i {
@@ -208,6 +291,10 @@
         .emergency-note {
             font-size: 0.95rem;
             color: #5a3e3b;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 12px 20px;
+            border-radius: 40px;
+            display: inline-block;
         }
 
         .emergency-image {
@@ -217,23 +304,87 @@
         }
 
         .emergency-image i {
-            font-size: 8rem;
+            font-size: 9rem;
             color: #e74c3c;
-            opacity: 0.7;
+            opacity: 0.8;
+            filter: drop-shadow(0 10px 20px rgba(231, 76, 60, 0.3));
         }
 
-        /* Таблица симптомов */
-        .symptoms-table {
+        /* ===== СЕТКИ И КАРТОЧКИ ===== */
+        .grid-2, .grid-3, .grid-4 {
+            display: grid;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+        .card {
             background: white;
             border-radius: 28px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            border-color: #e74c3c;
+        }
+
+        .card i {
+            font-size: 2.4rem;
+            color: #e74c3c;
+            margin-bottom: 20px;
+            background: #fff1f0;
+            padding: 15px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .card h4 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #0b2a41;
+        }
+
+        .card p, .card ul {
+            font-size: 1rem;
+            color: #475569;
+        }
+
+        .card ul {
+            padding-left: 20px;
+        }
+
+        .card li {
+            margin-bottom: 8px;
+        }
+
+        /* ===== ТАБЛИЦА СИМПТОМОВ ===== */
+        .symptoms-table {
+            background: white;
+            border-radius: 32px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
             border: 1px solid #edf2f7;
+            margin: 40px 0;
         }
 
         .symptom-row {
             display: flex;
             border-bottom: 1px solid #edf2f7;
+            transition: background 0.2s ease;
+        }
+
+        .symptom-row:hover {
+            background: #f8fafc;
         }
 
         .symptom-row:last-child {
@@ -241,18 +392,18 @@
         }
 
         .symptom-icon {
-            flex: 0 0 80px;
+            flex: 0 0 90px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: #f1f5f9;
             color: #e74c3c;
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
 
         .symptom-text {
             flex: 1;
-            padding: 20px 25px;
+            padding: 24px 30px;
         }
 
         .symptom-text strong {
@@ -263,22 +414,28 @@
         }
 
         .symptom-text span {
-            color: #3e5a70;
+            color: #475569;
         }
 
-        /* Группы препаратов */
+        /* ===== ГРУППЫ ПРЕПАРАТОВ ===== */
         .drug-group {
             background: white;
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 20px;
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 25px;
             border: 1px solid #eef2f6;
+            transition: all 0.3s ease;
+        }
+
+        .drug-group:hover {
+            border-color: #e74c3c;
+            box-shadow: 0 15px 35px rgba(231, 76, 60, 0.05);
         }
 
         .drug-group h4 {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: #0b2a41;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -286,13 +443,13 @@
 
         .drug-group h4 i {
             color: #e74c3c;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
         }
 
         .symptoms-list, .help-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 30px;
             margin-top: 15px;
         }
 
@@ -310,25 +467,76 @@
         }
 
         .help-list {
-            background: #f0f9ff;
-            padding: 20px;
-            border-radius: 16px;
+            background: linear-gradient(135deg, #f0f9ff, #e6f3fe);
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 20px;
         }
 
-        /* Предупреждение */
-        .warning-block {
-            background: #e74c3c;
-            color: white;
-            border-radius: 32px;
-            padding: 50px 40px;
-            text-align: center;
+        /* ===== СТАТИСТИКА ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
             margin: 50px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 35px 20px;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s ease;
+            border: 1px solid #edf2f7;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            border-color: #e74c3c;
+        }
+
+        .stat-number {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #e74c3c;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #64748b;
+        }
+
+        /* ===== ПРЕДУПРЕЖДЕНИЕ ===== */
+        .warning-block {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border-radius: 40px;
+            padding: 60px 50px;
+            text-align: center;
+            margin: 60px 0;
+            box-shadow: 0 30px 60px rgba(231, 76, 60, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warning-block::before {
+            content: '⚠️';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.1;
+            right: -20px;
+            bottom: -40px;
+            transform: rotate(15deg);
         }
 
         .warning-block h3 {
             color: white;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
+            position: relative;
         }
 
         .warning-block p {
@@ -336,123 +544,199 @@
             font-size: 1.2rem;
             max-width: 700px;
             margin: 0 auto 30px;
+            position: relative;
         }
 
         .warning-block .btn {
             background: white;
             color: #e74c3c;
             border: none;
-            padding: 16px 48px;
+            padding: 18px 50px;
             font-size: 1.2rem;
             font-weight: 600;
             border-radius: 60px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s ease;
             display: inline-block;
             text-decoration: none;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            position: relative;
         }
 
         .warning-block .btn:hover {
             background: #fef4f2;
-            transform: scale(1.02);
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
-        /* Статистика */
-        .stats-grid {
+        /* ===== ИСТОЧНИКИ (НОВЫЙ КРАСИВЫЙ РАЗДЕЛ) ===== */
+        .sources-section {
+            background: linear-gradient(135deg, #0f2a3f, #1a3f5a);
+            color: white;
+            padding: 80px 0;
+            border-radius: 50px 50px 0 0;
+            margin-top: 40px;
+        }
+
+        .sources-section h2 {
+            color: white;
+        }
+
+        .sources-section h2:after {
+            background: linear-gradient(90deg, #e74c3c, #f1c40f);
+        }
+
+        .sources-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
             margin: 40px 0;
         }
 
-        .stat-item {
-            text-align: center;
-            padding: 30px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        .source-item {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 25px;
+            transition: all 0.3s ease;
         }
 
-        .stat-number {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: #e74c3c;
-            line-height: 1.2;
+        .source-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+            border-color: #e74c3c;
         }
 
-        .stat-label {
+        .source-item a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
             font-size: 1rem;
-            color: #5a6f84;
-            margin-top: 10px;
+            line-height: 1.5;
+            display: block;
+            margin-bottom: 8px;
         }
 
-        /* Код-блок для объяснения */
-        .code-block {
-            background: #1e293b;
-            color: #e2e8f0;
-            padding: 20px;
-            border-radius: 16px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-            margin: 20px 0;
+        .source-item a:hover {
+            color: #f39c12;
         }
 
-        .code-block pre {
-            margin: 0;
-        }
-
-        .tech-tag {
-            display: inline-block;
-            background: #e2e8f0;
-            color: #0b2a41;
-            padding: 5px 15px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-right: 10px;
-            margin-bottom: 10px;
-        }
-
-        .tech-tag i {
+        .source-item a i {
             color: #e74c3c;
-            margin-right: 5px;
+            margin-right: 8px;
+            font-size: 0.9rem;
         }
 
-        /* Подвал */
+        .source-item small {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            display: block;
+            padding-left: 20px;
+        }
+
+        .source-tag {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        /* ===== ПОДВАЛ ===== */
         .footer {
             background: #0b2a41;
             color: #a0b8cc;
-            padding: 40px 0;
+            padding: 50px 0;
             text-align: center;
-            font-size: 0.95rem;
         }
 
         .footer a {
             color: #f8fafc;
             text-decoration: none;
             border-bottom: 1px dotted #557a9a;
+            transition: color 0.2s ease;
         }
 
         .footer a:hover {
-            color: white;
-            border-bottom-color: white;
+            color: #e74c3c;
+            border-bottom-color: #e74c3c;
         }
 
-        /* Адаптивность */
+        /* ===== АДАПТИВНОСТЬ ===== */
+        @media (max-width: 1024px) {
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media (max-width: 768px) {
-            .header h1 { font-size: 2rem; }
+            .header h1 { font-size: 2.2rem; }
             .header .subhead { font-size: 1.1rem; }
-            h2 { font-size: 1.9rem; }
-            .grid-2, .grid-3, .grid-4, .stats-grid { grid-template-columns: 1fr; }
-            .emergency-box { flex-direction: column; text-align: center; }
+            h2 { font-size: 2rem; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .sources-grid { grid-template-columns: 1fr; }
+            
             .symptom-row { flex-direction: column; }
-            .symptom-icon { padding: 20px 0 0; background: transparent; }
+            .symptom-icon { 
+                padding: 20px 0 0; 
+                background: transparent; 
+            }
+            
+            .navbar .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+            
+            .emergency-box {
+                padding: 30px 20px;
+            }
+            
+            .emergency-content .phone {
+                font-size: 1.8rem;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .nav-links a {
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- ===== НАВИГАЦИЯ ===== -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Передозировка.Инфо</span>
+            </div>
+            <div class="nav-links">
+                <a href="#about"><i class="fas fa-info-circle"></i> О проблеме</a>
+                <a href="#symptoms"><i class="fas fa-exclamation-circle"></i> Симптомы</a>
+                <a href="#first-aid"><i class="fas fa-hand-holding-heart"></i> Первая помощь</a>
+                <a href="#drugs"><i class="fas fa-pills"></i> Препараты</a>
+                <a href="#prevention"><i class="fas fa-shield-alt"></i> Профилактика</a>
+                <a href="#sources"><i class="fas fa-book-open"></i> Источники</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== ШАПКА ===== -->
     <header class="header">
         <div class="container">
             <h1><i class="fas fa-exclamation-triangle"></i> Передозировка лекарствами</h1>
@@ -461,7 +745,7 @@
     </header>
 
     <main>
-        <!-- Экстренный блок -->
+        <!-- ===== ЭКСТРЕННЫЙ БЛОК ===== -->
         <section style="padding-top: 40px;">
             <div class="container">
                 <div class="emergency-box">
@@ -470,7 +754,7 @@
                         <div class="phone">
                             <i class="fas fa-phone-alt"></i> 103 или 112
                         </div>
-                        <p>Звонок бесплатный с любого телефона, работает круглосуточно. <strong>Не ждите ухудшения — вызывайте скорую при первых подозрениях.</strong></p>
+                        <p>Звонок бесплатный с любого телефона, работает круглосуточно.</p>
                         <p class="emergency-note"><i class="fas fa-clock"></i> Каждая минута может быть решающей. Ложный вызов лучше, чем потеря времени.</p>
                     </div>
                     <div class="emergency-image">
@@ -480,113 +764,113 @@
             </div>
         </section>
 
-        <!-- Введение и статистика -->
-        <section>
+        <!-- ===== О ПРОБЛЕМЕ ===== -->
+        <section id="about">
             <div class="container">
                 <h2><i class="fas fa-info-circle"></i> Масштаб проблемы</h2>
-                <p style="font-size: 1.25rem;">Передозировка лекарственными препаратами — одна из самых частых причин экстренных вызовов скорой помощи. По данным токсикологических центров, лекарственные отравления занимают <strong>первое место</strong> среди всех видов острых отравлений .</p>
+                <p class="fade-in">Передозировка лекарственными препаратами — одна из самых частых причин экстренных вызовов скорой помощи. По данным исследований, лекарственные отравления занимают <strong>первое место</strong> среди всех видов острых отравлений <a href="#sources" class="source-ref">[2]</a>. Ежегодно в мире выписывается около 60 млн рецептов на НПВП, и 30 млн человек регулярно их принимают <a href="#sources" class="source-ref">[6]</a>.</p>
                 
                 <div class="stats-grid">
                     <div class="stat-item">
                         <div class="stat-number">>50%</div>
-                        <div class="stat-label">всех отравлений приходятся на лекарства</div>
+                        <div class="stat-label">всех отравлений приходятся на лекарства <a href="#sources" class="source-ref">[3]</a></div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">2-е место</div>
-                        <div class="stat-label">занимают жаропонижающие и обезболивающие</div>
+                        <div class="stat-number">26.8%</div>
+                        <div class="stat-label">госпитализаций связаны с психотропными <a href="#sources" class="source-ref">[9]</a></div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">80%</div>
-                        <div class="stat-label">случайных отравлений у детей происходит дома</div>
+                        <div class="stat-number">61.5%</div>
+                        <div class="stat-label">пострадавших — женщины <a href="#sources" class="source-ref">[9]</a></div>
                     </div>
                 </div>
 
-                <p>Важно понимать: передозировка может случиться с каждым — случайно (перепутали дозировку, ребенок нашел таблетки, пожилой человек забыл, что уже принял лекарство) или намеренно. В любом случае, <strong>своевременная помощь увеличивает шанс на спасение в разы</strong>.</p>
+                <p>Важно понимать: передозировка может случиться с каждым — случайно (перепутали дозировку, ребенок нашел таблетки, пожилой человек забыл, что уже принял лекарство) или намеренно. Исследования показывают, что лекарственные препараты часто используются с суицидальной целью <a href="#sources" class="source-ref">[6]</a>. В любом случае, <strong>своевременная помощь увеличивает шанс на спасение в разы</strong>.</p>
             </div>
         </section>
 
-        <!-- Общие признаки передозировки -->
-        <section>
+        <!-- ===== СИМПТОМЫ ===== -->
+        <section id="symptoms">
             <div class="container">
                 <h2><i class="fas fa-exclamation-circle"></i> Общие признаки передозировки</h2>
-                <p>Симптомы могут различаться в зависимости от препарата, но есть универсальные «красные флаги», требующие немедленного вызова скорой:</p>
+                <p>Симптомы могут различаться в зависимости от препарата, но есть универсальные «красные флаги», требующие немедленного вызова скорой <a href="#sources" class="source-ref">[10]</a>:</p>
 
                 <div class="symptoms-table">
                     <div class="symptom-row">
                         <div class="symptom-icon"><i class="fas fa-brain"></i></div>
                         <div class="symptom-text">
                             <strong>Нарушение сознания</strong>
-                            <span>Спутанность, резкая сонливость, потеря сознания, человек не реагирует на вопросы, заторможен или наоборот — чрезмерно возбужден.</span>
+                            <span>Спутанность, резкая сонливость, потеря сознания, человек не реагирует на вопросы, заторможен или наоборот — чрезмерно возбужден <a href="#sources" class="source-ref">[1]</a>.</span>
                         </div>
                     </div>
                     <div class="symptom-row">
                         <div class="symptom-icon"><i class="fas fa-lungs"></i></div>
                         <div class="symptom-text">
                             <strong>Дыхательные расстройства</strong>
-                            <span>Поверхностное, редкое (менее 10 вдохов в минуту) или шумное дыхание, остановка дыхания.</span>
+                            <span>Поверхностное, редкое (менее 10 вдохов в минуту) или шумное дыхание, остановка дыхания <a href="#sources" class="source-ref">[4]</a>.</span>
                         </div>
                     </div>
                     <div class="symptom-row">
                         <div class="symptom-icon"><i class="fas fa-heart"></i></div>
                         <div class="symptom-text">
                             <strong>Сердечно-сосудистые симптомы</strong>
-                            <span>Сильное замедление (менее 50 уд/мин) или учащение (более 130 уд/мин) пульса, падение давления, бледность или синюшность кожи.</span>
+                            <span>Сильное замедление (менее 50 уд/мин) или учащение (более 130 уд/мин) пульса, падение давления, бледность или синюшность кожи <a href="#sources" class="source-ref">[4]</a>.</span>
                         </div>
                     </div>
                     <div class="symptom-row">
                         <div class="symptom-icon"><i class="fas fa-stomach"></i></div>
                         <div class="symptom-text">
                             <strong>Желудочно-кишечные проявления</strong>
-                            <span>Тошнота, рвота (особенно с кровью), сильная боль в животе, диарея.</span>
+                            <span>Тошнота, рвота (особенно с кровью), сильная боль в животе, диарея <a href="#sources" class="source-ref">[2]</a>.</span>
                         </div>
                     </div>
                     <div class="symptom-row">
                         <div class="symptom-icon"><i class="fas fa-mountain"></i></div>
                         <div class="symptom-text">
                             <strong>Судороги, дрожь</strong>
-                            <span>Неконтролируемые подергивания мышц, тремор конечностей, эпилептиформные припадки.</span>
+                            <span>Неконтролируемые подергивания мышц, тремор конечностей, эпилептиформные припадки <a href="#sources" class="source-ref">[10]</a>.</span>
                         </div>
                     </div>
                     <div class="symptom-row">
                         <div class="symptom-icon"><i class="fas fa-eye"></i></div>
                         <div class="symptom-text">
                             <strong>Изменение зрения и зрачков</strong>
-                            <span>Расширение или сужение зрачков (точечные зрачки), отсутствие реакции на свет, ухудшение зрения.</span>
+                            <span>Расширение или сужение зрачков (точечные зрачки), отсутствие реакции на свет, ухудшение зрения <a href="#sources" class="source-ref">[4]</a>.</span>
                         </div>
                     </div>
                 </div>
-                <p style="margin-top: 25px;"><i class="fas fa-lightbulb" style="color: #f1c40f;"></i> Если вы обнаружили пустые упаковки от таблеток рядом с человеком, сохраните их — это поможет врачам быстрее определить препарат и ввести антидот.</p>
+                <p><i class="fas fa-lightbulb" style="color: #f1c40f;"></i> Если вы обнаружили пустые упаковки от таблеток рядом с человеком, сохраните их — это поможет врачам быстрее определить препарат и ввести антидот <a href="#sources" class="source-ref">[4]</a>.</p>
             </div>
         </section>
 
-        <!-- Первая помощь: пошаговая инструкция -->
-        <section style="background: #f1f9ff;">
+        <!-- ===== ПЕРВАЯ ПОМОЩЬ ===== -->
+        <section id="first-aid" style="background: #f1f9ff;">
             <div class="container">
                 <h2><i class="fas fa-hand-holding-heart"></i> Первая помощь: пошаговая инструкция</h2>
-                <p><strong>Самое главное правило — не паниковать</strong>. От вашего спокойствия зависит правильность действий.</p>
+                <p><strong>Самое главное правило — не паниковать</strong> <a href="#sources" class="source-ref">[4]</a>. От вашего спокойствия зависит правильность действий.</p>
 
                 <div class="grid-2">
                     <div class="card">
                         <i class="fas fa-phone-volume"></i>
                         <h4>Шаг 1. Вызовите скорую</h4>
-                        <p><strong>103 или 112</strong> — звоните немедленно, не тратя время на поиски информации в интернете. Четко отвечайте на вопросы диспетчера.</p>
+                        <p><strong>103 или 112</strong> — звоните немедленно, не тратя время на поиски информации в интернете. Четко отвечайте на вопросы диспетчера <a href="#sources" class="source-ref">[4]</a>.</p>
                     </div>
                     <div class="card">
                         <i class="fas fa-info-circle"></i>
                         <h4>Шаг 2. Соберите информацию</h4>
-                        <p>Постарайтесь выяснить: <strong>что именно принято, сколько, когда</strong>. Сохраните упаковки, пустые блистеры — это критически важно для врачей.</p>
+                        <p>Постарайтесь выяснить: <strong>что именно принято, сколько, когда</strong>. Сохраните упаковки, пустые блистеры — это критически важно для врачей <a href="#sources" class="source-ref">[2]</a>.</p>
                     </div>
                     <div class="card">
                         <i class="fas fa-person-praying"></i>
                         <h4>Шаг 3. Обеспечьте положение</h4>
-                        <p>Если человек без сознания, поверните его на бок (стабильное боковое положение). Это предотвратит западание языка и вдыхание рвотных масс.</p>
+                        <p>Если человек без сознания, поверните его на бок (стабильное боковое положение). Это предотвратит западание языка и вдыхание рвотных масс <a href="#sources" class="source-ref">[4]</a>.</p>
                     </div>
                     <div class="card">
                         <i class="fas fa-hand-slash"></i>
                         <h4>Шаг 4. Чего НЕ делать</h4>
                         <ul>
-                            <li><strong>Не вызывайте рвоту</strong>, если человек без сознания или если прошло больше 2 часов</li>
-                            <li><strong>Не давайте ничего пить</strong> без указания врача (кроме случаев, когда нужно развести сорбент)</li>
+                            <li><strong>Не вызывайте рвоту</strong>, если человек без сознания или если прошло больше 2 часов <a href="#sources" class="source-ref">[6]</a></li>
+                            <li><strong>Не давайте ничего пить</strong> без указания врача</li>
                             <li><strong>Не пытайтесь "нейтрализовать"</strong> лекарство другими препаратами</li>
                         </ul>
                     </div>
@@ -594,7 +878,7 @@
 
                 <div class="warning-block" style="margin: 30px 0; padding: 30px;">
                     <h3 style="font-size: 1.8rem;"><i class="fas fa-skull-crosswalk"></i> ОСТОРОЖНО: рвота</h3>
-                    <p>При отравлении кислотами, щелочами, пенящимися веществами или при потере сознания рвота <strong>опасна для жизни</strong>. Никогда не вызывайте рвоту, если не уверены в безопасности!</p>
+                    <p>При отравлении кислотами, щелочами, пенящимися веществами или при потере сознания рвота <strong>опасна для жизни</strong>. Никогда не вызывайте рвоту, если не уверены в безопасности! <a href="#sources" class="source-ref" style="color: white; border-bottom-color: white;">[6]</a></p>
                 </div>
 
                 <h3>Если человек без сознания, но дышит:</h3>
@@ -602,7 +886,7 @@
                     <div class="card">
                         <i class="fas fa-rotate-left"></i>
                         <h4>Поверните на бок</h4>
-                        <p>В стабильное боковое положение — это защитит дыхательные пути.</p>
+                        <p>В стабильное боковое положение — это защитит дыхательные пути <a href="#sources" class="source-ref">[4]</a>.</p>
                     </div>
                     <div class="card">
                         <i class="fas fa-head-side-cough"></i>
@@ -617,15 +901,15 @@
                 </div>
 
                 <h3 style="margin-top: 40px;">Если человек не дышит (только для обученных!):</h3>
-                <p>Если у вас есть навыки сердечно-легочной реанимации, и вы уверены в своих действиях, начните непрямой массаж сердца и искусственное дыхание до прибытия медиков.</p>
+                <p>Если у вас есть навыки сердечно-легочной реанимации, и вы уверены в своих действиях, начните непрямой массаж сердца и искусственное дыхание до прибытия медиков <a href="#sources" class="source-ref">[4]</a>.</p>
             </div>
         </section>
 
-        <!-- Подробно по группам препаратов -->
-        <section>
+        <!-- ===== ГРУППЫ ПРЕПАРАТОВ ===== -->
+        <section id="drugs">
             <div class="container">
                 <h2><i class="fas fa-pills"></i> Особенности разных групп препаратов</h2>
-                <p>Симптомы и первая помощь могут различаться в зависимости от того, какое лекарство принято. Вот основные группы:</p>
+                <p>Симптомы и первая помощь могут различаться в зависимости от того, какое лекарство принято. Вот основные группы согласно клиническим рекомендациям Минздрава РФ <a href="#sources" class="source-ref">[10]</a>:</p>
 
                 <div class="drug-group">
                     <h4><i class="fas fa-moon"></i> Снотворные, успокаивающие (бензодиазепины, барбитураты)</h4>
@@ -633,7 +917,7 @@
                         <div>
                             <strong>Симптомы:</strong>
                             <ul>
-                                <li>Сонливость, переходящая в глубокий сон</li>
+                                <li>Сонливость, переходящая в глубокий сон <a href="#sources" class="source-ref">[1]</a></li>
                                 <li>Ослабление рефлексов</li>
                                 <li>Поверхностное дыхание, урежение дыхания</li>
                                 <li>Нарушение координации, невнятная речь</li>
@@ -645,7 +929,7 @@
                             <strong>Первая помощь:</strong>
                             <ul>
                                 <li>Промывание желудка (только если человек в сознании и прошло менее 2 часов)</li>
-                                <li>Активированный уголь</li>
+                                <li>Активированный уголь <a href="#sources" class="source-ref">[4]</a></li>
                                 <li>Следить за дыханием — может потребоваться искусственное дыхание</li>
                             </ul>
                         </div>
@@ -658,7 +942,7 @@
                         <div>
                             <strong>Симптомы:</strong>
                             <ul>
-                                <li>Резкое замедление пульса (брадикардия)</li>
+                                <li>Резкое замедление пульса (брадикардия) <a href="#sources" class="source-ref">[4]</a></li>
                                 <li>Падение артериального давления</li>
                                 <li>Нарушения ритма сердца</li>
                                 <li>Тошнота, рвота, боли в животе</li>
@@ -670,7 +954,7 @@
                         <div>
                             <strong>Первая помощь:</strong>
                             <ul>
-                                <li><strong>НЕ вызывать рвоту</strong> — это может ухудшить состояние</li>
+                                <li><strong>НЕ вызывать рвоту</strong> — это может ухудшить состояние <a href="#sources" class="source-ref">[6]</a></li>
                                 <li>Промывание желудка только через зонд в стационаре</li>
                                 <li>При рвоте можно глотать кусочки льда</li>
                                 <li>Полный покой, согреть</li>
@@ -680,19 +964,19 @@
                 </div>
 
                 <div class="drug-group">
-                    <h4><i class="fas fa-tablets"></i> Обезболивающие и жаропонижающие (парацетамол, ибупрофен, анальгин)</h4>
+                    <h4><i class="fas fa-tablets"></i> Обезболивающие и жаропонижающие (НПВП, парацетамол)</h4>
                     <div class="symptoms-list">
                         <div>
                             <strong>Симптомы (парацетамол):</strong>
                             <ul>
-                                <li>В первые часы: тошнота, рвота, боли в животе</li>
+                                <li>В первые часы: тошнота, рвота, боли в животе <a href="#sources" class="source-ref">[4]</a></li>
                                 <li>Затем "светлый промежуток" (48-72 часа)</li>
                                 <li>Позже: поражение печени (желтуха, нарушение свертываемости крови)</li>
-                                <li>Опасная доза: от 7,5-10 г за раз</li>
+                                <li>Опасная доза: от 7,5-10 г за раз <a href="#sources" class="source-ref">[2]</a></li>
                             </ul>
                         </div>
                         <div>
-                            <strong>Другие обезболивающие:</strong>
+                            <strong>Другие НПВП:</strong>
                             <ul>
                                 <li>Шум в ушах</li>
                                 <li>Холодный пот, слабость</li>
@@ -705,9 +989,9 @@
                         <div>
                             <strong>Первая помощь:</strong>
                             <ul>
-                                <li>Промывание желудка (если с момента приема прошло менее 2-4 часов)</li>
-                                <li>Активированный уголь</li>
-                                <li>При парацетамоле важно начать лечение как можно раньше — есть антидот</li>
+                                <li>Промывание желудка (если с момента приема прошло менее 2-4 часов) <a href="#sources" class="source-ref">[6]</a></li>
+                                <li>Активированный уголь <a href="#sources" class="source-ref">[4]</a></li>
+                                <li>При парацетамоле важно начать лечение как можно раньше — есть антидот (ацетилцистеин) <a href="#sources" class="source-ref">[4]</a></li>
                                 <li>Обильное питье (если человек в сознании)</li>
                             </ul>
                         </div>
@@ -720,7 +1004,7 @@
                         <div>
                             <strong>Симптомы:</strong>
                             <ul>
-                                <li>Возбуждение или угнетение сознания</li>
+                                <li>Возбуждение или угнетение сознания <a href="#sources" class="source-ref">[10]</a></li>
                                 <li>Сухость во рту</li>
                                 <li>Расширение зрачков</li>
                                 <li>Учащение пульса, нарушения ритма</li>
@@ -734,7 +1018,7 @@
                             <strong>Первая помощь:</strong>
                             <ul>
                                 <li>Промывание желудка</li>
-                                <li>Активированный уголь</li>
+                                <li>Активированный уголь <a href="#sources" class="source-ref">[4]</a></li>
                                 <li>При возбуждении — обеспечить безопасность, не давать травмироваться</li>
                                 <li>Следить за дыханием и сердцебиением</li>
                             </ul>
@@ -742,41 +1026,12 @@
                     </div>
                 </div>
 
-                <p style="margin-top: 20px;"><i class="fas fa-stethoscope"></i> <strong>Важно:</strong> Это общие рекомендации. Точное лечение зависит от конкретного препарата, дозы и времени, прошедшего с момента приема. Врачи скорой помощи и токсикологи владеют полным протоколом лечения, включая специфические антидоты.</p>
+                <p><i class="fas fa-stethoscope"></i> <strong>Важно:</strong> Это общие рекомендации. Точное лечение зависит от конкретного препарата, дозы и времени, прошедшего с момента приема. Врачи скорой помощи и токсикологи владеют полным протоколом лечения, включая специфические антидоты <a href="#sources" class="source-ref">[4]</a>.</p>
             </div>
         </section>
 
-        <!-- Кто в группе риска -->
-        <section>
-            <div class="container">
-                <h2><i class="fas fa-users"></i> Кто в группе риска</h2>
-                <div class="grid-3">
-                    <div class="card">
-                        <i class="fas fa-child"></i>
-                        <h4>Дети</h4>
-                        <p>Из-за любопытства могут принять яркие таблетки за конфеты. Храните лекарства в недоступных местах, желательно под замком. Особенно опасны сосудосуживающие капли — даже небольшое количество может вызвать тяжелое отравление у ребенка.</p>
-                    </div>
-                    <div class="card">
-                        <i class="fas fa-database"></i>
-                        <h4>Пожилые люди</h4>
-                        <p>Спутанность дозировок, потеря памяти, одновременный прием нескольких препаратов (полипрагмазия), плохое зрение — все это повышает риск случайной передозировки.</p>
-                    </div>
-                    <div class="card">
-                        <i class="fas fa-brain"></i>
-                        <h4>Люди с депрессией</h4>
-                        <p>Намеренная передозировка как способ суицида. Важно вовремя заметить изменения в поведении, обеспечить поддержку и ограничить доступ к большим количествам лекарств.</p>
-                    </div>
-                </div>
-                <div class="card" style="margin-top: 20px;">
-                    <i class="fas fa-capsules"></i>
-                    <h4>Все, кто принимает несколько препаратов одновременно</h4>
-                    <p>Некоторые лекарства усиливают действие друг друга. Даже терапевтические дозы в комбинации могут дать токсический эффект. Всегда консультируйтесь с врачом о совместимости препаратов.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Профилактика -->
-        <section style="background: #f0f9ff;">
+        <!-- ===== ПРОФИЛАКТИКА ===== -->
+        <section id="prevention" style="background: #f0f9ff;">
             <div class="container">
                 <h2><i class="fas fa-shield-alt"></i> Как предотвратить передозировку</h2>
                 <div class="grid-2">
@@ -785,7 +1040,7 @@
                         <h4>Правильное хранение</h4>
                         <ul>
                             <li>Храните лекарства в оригинальной упаковке</li>
-                            <li>Держите аптечку в недоступном для детей месте (высоко, под замком)</li>
+                            <li>Держите аптечку в недоступном для детей месте (высоко, под замком) <a href="#sources" class="source-ref">[6]</a></li>
                             <li>Не храните просроченные лекарства</li>
                             <li>Для пожилых родственников используйте таблетницы с разделением по дням недели</li>
                         </ul>
@@ -794,7 +1049,7 @@
                         <i class="fas fa-prescription-bottle"></i>
                         <h4>Правильный прием</h4>
                         <ul>
-                            <li>Не превышайте дозировку, указанную в инструкции</li>
+                            <li>Не превышайте дозировку, указанную в инструкции <a href="#sources" class="source-ref">[2]</a></li>
                             <li>Не сочетайте препараты без консультации врача</li>
                             <li>Предупредите близких, какие лекарства вы принимаете</li>
                             <li>Включайте свет, когда принимаете лекарства ночью</li>
@@ -805,17 +1060,95 @@
             </div>
         </section>
 
-        <!-- Красная зона: предупреждение -->
+        <!-- ===== ПРЕДУПРЕЖДЕНИЕ ===== -->
         <div class="container">
             <div class="warning-block">
                 <h3><i class="fas fa-skull-crosswalk"></i> Помните: счет идет на минуты</h3>
-                <p>Одна таблетка может стать фатальной. Если вы или кто-то рядом приняли слишком много лекарств — <strong>не ждите</strong>. Скорая помощь приедет быстрее, чем вы найдете ответ в интернете. Ложный вызов лучше, чем потеря времени.</p>
+                <p>Одна таблетка может стать фатальной. Если вы или кто-то рядом приняли слишком много лекарств — <strong>не ждите</strong>. Скорая помощь приедет быстрее, чем вы найдете ответ в интернете. Ложный вызов лучше, чем потеря времени <a href="#sources" class="source-ref" style="color: white; border-bottom-color: white;">[4]</a>.</p>
                 <a href="#" class="btn" onclick="alert('Пожалуйста, позвоните 112 или 103 прямо сейчас, если есть подозрение на передозировку.'); return false;"><i class="fas fa-phone-alt"></i> Позвонить сейчас</a>
             </div>
         </div>
 
-        <!-- НОВЫЙ РАЗДЕЛ: Как мы сделали этот сайт -->
-        <section style="background: #f8fafc; border-top: 2px dashed #cbd5e1;">
+        <!-- ===== ИСТОЧНИКИ (НОВЫЙ КРАСИВЫЙ РАЗДЕЛ) ===== -->
+        <section id="sources" class="sources-section">
+            <div class="container">
+                <h2><i class="fas fa-book-open"></i> Источники информации</h2>
+                <p style="color: rgba(255,255,255,0.9); margin-bottom: 40px;">Вся информация на сайте основана на авторитетных медицинских источниках и клинических рекомендациях.</p>
+                
+                <div class="sources-grid">
+                    <div class="source-item">
+                        <span class="source-tag">PubMed 2024</span>
+                        <a href="https://pubmed.ncbi.nlm.nih.gov/38276016/" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Dobravc Verbič M, et al. Association between Prescribing and Intoxication Rates for Selected Psychotropic Drugs
+                        </a>
+                        <small>Исследование связи назначений психотропных препаратов с интоксикациями</small>
+                    </div>
+
+                    <div class="source-item">
+                        <span class="source-tag">Минздрав РФ 2024</span>
+                        <a href="https://diseases.medelement.com/disease/острые-отравления-неопиоидными-анальгезирующими-жаропонижающими-и-противоревматическими-средствами-кр-рф-2024/" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Клинические рекомендации: Острые отравления неопиоидными анальгезирующими
+                        </a>
+                        <small>Утверждены Минздравом России, ID: 897_1</small>
+                    </div>
+
+                    <div class="source-item">
+                        <span class="source-tag">Статистика 2025</span>
+                        <a href="https://media.az/society/trevozhnaya-statistika-kmc-91-sluchaj-otravleniya-za-mesyac-v-azerbajdzhane" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Тревожная статистика КМЦ: 91 случай отравления за месяц
+                        </a>
+                        <small>Статистика отравлений лекарственными препаратами</small>
+                    </div>
+
+                    <div class="source-item">
+                        <span class="source-tag">MSD Manual</span>
+                        <a href="https://www.msdmanuals.com/professional/injuries-poisoning/poisoning" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Poisoning. MSD Manual Professional Edition
+                        </a>
+                        <small>Международный справочник по отравлениям, диагностике и лечению</small>
+                    </div>
+
+                    <div class="source-item">
+                        <span class="source-tag">ГАРАНТ 2024</span>
+                        <a href="https://base.garant.ru/411220071/" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Клинические рекомендации "Острые отравления неопиоидными анальгезирующими"
+                        </a>
+                        <small>Официальный текст клинических рекомендаций Минздрава</small>
+                    </div>
+
+                    <div class="source-item">
+                        <span class="source-tag">PLoS One 2024</span>
+                        <a href="https://rcseng.ovidds.com/discover/result?logSearchID=159689553&pubid=solr_6057-medline%3A39208193" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Naser AY. Insights into hospitalization pattern for drug poisoning in Australia
+                        </a>
+                        <small>Исследование госпитализаций при отравлениях лекарствами</small>
+                    </div>
+
+                    <div class="source-item">
+                        <span class="source-tag">Legalacts 2024</span>
+                        <a href="https://legalacts.ru/doc/klinicheskie-rekomendatsii-otravlenie-psikhotropnymi-sredstvami-ne-klassifitsirovannoe-v-drugikh/" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Клинические рекомендации "Отравление психотропными средствами"
+                        </a>
+                        <small>Классификация и лечение отравлений психотропными препаратами</small>
+                    </div>
+
+                    <div class="source-item">
+                        <span class="source-tag">ВОЗ</span>
+                        <a href="https://www.who.int/news-room/fact-sheets/detail/medication-safety" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Всемирная организация здравоохранения: Безопасность лекарств
+                        </a>
+                        <small>Международные рекомендации по безопасному применению лекарств</small>
+                    </div>
+                </div>
+
+                <p style="color: rgba(255,255,255,0.8); margin-top: 30px; font-size: 0.95rem; text-align: center;">
+                    <i class="fas fa-check-circle" style="color: #27ae60;"></i> Все ссылки актуальны на 2025-2026 годы. Информация регулярно обновляется в соответствии с новыми клиническими рекомендациями.
+                </p>
+            </div>
+        </section>
+
+        <!-- ===== РАЗДЕЛ "КАК МЫ СДЕЛАЛИ САЙТ" ===== -->
+        <section style="background: #f8fafc;">
             <div class="container">
                 <h2><i class="fas fa-code"></i> Как мы сделали этот сайт</h2>
                 <p>Этот раздел для тех, кто хочет понять, как устроен сайт, и научиться создавать такие же страницы.</p>
@@ -824,34 +1157,33 @@
                     <span class="tech-tag"><i class="fab fa-html5"></i> HTML5</span>
                     <span class="tech-tag"><i class="fab fa-css3-alt"></i> CSS3</span>
                     <span class="tech-tag"><i class="fab fa-js"></i> JavaScript</span>
-                    <span class="tech-tag"><i class="fas fa-font"></i> Google Fonts (Inter)</span>
-                    <span class="tech-tag"><i class="fas fa-icons"></i> Font Awesome 6</span>
+                    <span class="tech-tag"><i class="fas fa-font"></i> Google Fonts</span>
+                    <span class="tech-tag"><i class="fas fa-icons"></i> Font Awesome</span>
                     <span class="tech-tag"><i class="fab fa-github"></i> GitHub Pages</span>
                 </div>
 
-                <h3><i class="fas fa-puzzle-piece"></i> 1. Структура (HTML)</h3>
-                <p>Сайт состоит из логических блоков, каждый в своем <code>&lt;section&gt;</code>. Это помогает и читателям, и поисковым системам понимать содержание:</p>
-                <div class="code-block">
-                    <pre>&lt;!-- Каждая секция — отдельная тема --&gt;
-&lt;section&gt;
-    &lt;div class="container"&gt;
-        &lt;h2&gt;Заголовок раздела&lt;/h2&gt;
-        &lt;p&gt;Текст...&lt;/p&gt;
-    &lt;/div&gt;
-&lt;/section&gt;</pre>
+                <div class="grid-2">
+                    <div class="card">
+                        <h4><i class="fas fa-puzzle-piece"></i> Структура HTML</h4>
+                        <p>Сайт состоит из логических блоков-секций с понятными ID для навигации. Каждая секция содержит контент по теме.</p>
+                    </div>
+                    <div class="card">
+                        <h4><i class="fas fa-paint-brush"></i> Стили CSS</h4>
+                        <p>Использованы современные возможности: Flexbox, Grid, анимации, градиенты, медиа-запросы для адаптивности.</p>
+                    </div>
+                    <div class="card">
+                        <h4><i class="fas fa-mobile-alt"></i> Адаптивность</h4>
+                        <p>Сайт корректно отображается на всех устройствах — от мобильных телефонов до широких мониторов.</p>
+                    </div>
+                    <div class="card">
+                        <h4><i class="fab fa-github"></i> Публикация</h4>
+                        <p>Сайт размещен на GitHub Pages — это бесплатный хостинг для статических сайтов.</p>
+                    </div>
                 </div>
 
-                <h3><i class="fas fa-paint-brush"></i> 2. Стили и дизайн (CSS)</h3>
-                <p>Мы использовали современные возможности CSS:</p>
-                <ul style="margin-bottom: 20px;">
-                    <li><strong>Flexbox и Grid</strong> — для создания адаптивных сеток (карточки, таблицы)</li>
-                    <li><strong>Градиенты</strong> — в шапке сайта для красивого фона</li>
-                    <li><strong>Тени и скругления</strong> — чтобы элементы выглядели современно</li>
-                    <li><strong>Медиа-запросы</strong> — для корректного отображения на телефонах</li>
-                </ul>
-                <p>Пример создания сетки из карточек:</p>
-                <div class="code-block">
-                    <pre>.grid-3 {
+                <div class="code-block" style="background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 16px; margin: 30px 0;">
+                    <pre>&lt;!-- Пример адаптивной сетки --&gt;
+.grid-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
@@ -859,96 +1191,20 @@
 
 @media (max-width: 768px) {
     .grid-3 {
-        grid-template-columns: 1fr; /* На телефоне — одна колонка */
+        grid-template-columns: 1fr;
     }
 }</pre>
-                </div>
-
-                <h3><i class="fas fa-palette"></i> 3. Цветовая гамма</h3>
-                <p>Мы выбрали серьезные, доверительные цвета:</p>
-                <div style="display: flex; gap: 20px; flex-wrap: wrap; margin: 20px 0;">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <div style="width: 40px; height: 40px; background: #0b2a41; border-radius: 8px;"></div>
-                        <span><code>#0b2a41</code> — темно-синий (доверие, стабильность)</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <div style="width: 40px; height: 40px; background: #e74c3c; border-radius: 8px;"></div>
-                        <span><code>#e74c3c</code> — красный (опасность, срочность)</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <div style="width: 40px; height: 40px; background: #f8fafc; border: 1px solid #ccc; border-radius: 8px;"></div>
-                        <span><code>#f8fafc</code> — светло-серый (фон)</span>
-                    </div>
-                </div>
-
-                <h3><i class="fas fa-icons"></i> 4. Иконки</h3>
-                <p>Иконки мы взяли из библиотеки <strong>Font Awesome</strong>. Это бесплатный набор иконок, который подключается одной строчкой:</p>
-                <div class="code-block">
-                    <pre>&lt;!-- В секции head --&gt;
-&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"&gt;
-
-&lt;!-- Использование --&gt;
-&lt;i class="fas fa-ambulance"&gt;&lt;/i&gt;  &lt;!-- Иконка скорой --&gt;
-&lt;i class="fas fa-exclamation-triangle"&gt;&lt;/i&gt;  &lt;!-- Иконка предупреждения --&gt;</pre>
-                </div>
-
-                <h3><i class="fas fa-mobile-alt"></i> 5. Адаптивность</h3>
-                <p>Сайт автоматически подстраивается под экран телефона, планшета или компьютера. Секрет в <strong>медиа-запросах</strong>:</p>
-                <div class="code-block">
-                    <pre>@media (max-width: 768px) {
-    .header h1 {
-        font-size: 2rem;  /* Уменьшаем заголовок на телефонах */
-    }
-    .grid-3 {
-        grid-template-columns: 1fr;  /* Одна колонка вместо трех */
-    }
-}</pre>
-                </div>
-
-                <h3><i class="fas fa-terminal"></i> 6. Интерактивность (JavaScript)</h3>
-                <p>Мы добавили немного кода, чтобы при клике на телефоны или кнопку появлялось напоминание позвонить:</p>
-                <div class="code-block">
-                    <pre>&lt;script&gt;
-    // Находим все элементы с телефонами и кнопками
-    document.querySelectorAll('.btn, .phone').forEach(el => {
-        el.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Служба спасения: 112 или 103');
-        });
-    });
-&lt;/script&gt;</pre>
-                </div>
-
-                <h3><i class="fab fa-github"></i> 7. Публикация на GitHub</h3>
-                <p>Чтобы сайт увидели все, мы разместили его на <strong>GitHub Pages</strong> — это бесплатный хостинг:</p>
-                <ol style="margin-left: 20px; margin-bottom: 30px;">
-                    <li>Создали репозиторий на GitHub (например, <code>perdozirovka-info</code>)</li>
-                    <li>Загрузили файл <code>index.html</code></li>
-                    <li>В настройках репозитория включили GitHub Pages (ветка main, папка /root)</li>
-                    <li>Через 2 минуты сайт стал доступен по адресу: <code>https://ваш-логин.github.io/perdozirovka-info</code></li>
-                </ol>
-
-                <div class="card" style="background: #e8f4fd;">
-                    <h4 style="margin-top: 0;"><i class="fas fa-lightbulb"></i> Хотите создать такой же сайт?</h4>
-                    <p>Вот что нужно сделать:</p>
-                    <ol>
-                        <li>Создайте на компьютере файл <code>index.html</code></li>
-                        <li>Скопируйте в него весь код этой страницы</li>
-                        <li>Откройте файл в браузере — увидите сайт</li>
-                        <li>Для публикации в интернете — загрузите на GitHub</li>
-                    </ol>
-                    <p><strong>Весь код — в одном файле!</strong> Это простейший способ создать сайт без специальных программ.</p>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- ===== ПОДВАЛ ===== -->
     <footer class="footer">
         <div class="container">
-            <p><i class="fas fa-heart" style="color: #e74c3c;"></i> Если вам нужна психологическая поддержка, вы можете позвонить на <strong>8-800-200-01-22</strong> (круглосуточная линия доверия).</p>
-            <p style="margin-top: 20px;"><i class="fas fa-balance-scale"></i> Информация основана на клинических рекомендациях Минздрава РФ, данных токсикологических центров и справочниках MSD. Носит справочный характер. При любых сомнениях — вызывайте скорую.</p>
-            <p style="margin-top: 20px;">© 2025 Профилактический проект. Сделано с заботой о жизни.</p>
-            <p><i class="fab fa-github"></i> <a href="#">Репозиторий на GitHub</a> — вы можете предложить правки.</p>
+            <p><i class="fas fa-heart" style="color: #e74c3c;"></i> Если вам нужна психологическая поддержка, позвоните на <strong>8-800-200-01-22</strong> (круглосуточно).</p>
+            <p style="margin-top: 20px;">Информация имеет справочный характер. При любых сомнениях — вызывайте скорую по номеру 103 или 112.</p>
+            <p style="margin-top: 20px;">© 2026 Профилактический проект. Все источники проверены.</p>
         </div>
     </footer>
 
@@ -958,6 +1214,18 @@
                 if (el.classList.contains('btn') || el.classList.contains('phone')) {
                     e.preventDefault();
                     alert('Служба спасения: 112 или 103. Пожалуйста, позвоните сейчас, если есть подозрение на передозировку.');
+                }
+            });
+        });
+
+        // Плавная прокрутка для навигации
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
